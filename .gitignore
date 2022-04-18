@@ -2,7 +2,8 @@
 /*.egg-info
 /include
 /lib
-.coverage*
+.coverage
+.coverage.*
 _build/
 .*cache/
 pytestdebug.log

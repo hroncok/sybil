@@ -4,13 +4,13 @@ norecursedirs=functional .git docs/example
 filterwarnings =
     ignore::DeprecationWarning
 
-[coverage:run]
+[run]
 source = sybil, tests
 omit =
   /the/path
   /tmp/*
 
-[coverage:report]
+[report]
 exclude_lines =
     pragma: no cover
     if TYPE_CHECKING:
