@@ -1,4 +1,4 @@
-from typing import Callable, TYPE_CHECKING, Iterable, TypeVar, Optional
+from typing import Callable, TYPE_CHECKING, Iterable, Optional, Any
 
 if TYPE_CHECKING:
     from .document import Document
@@ -6,6 +6,5 @@ if TYPE_CHECKING:
     from .region import Region
 
 
-Parsed = TypeVar('Parsed')
 Evaluator = Callable[['Example'], Optional[str]]
 Parser = Callable[['Document'], Iterable['Region']]

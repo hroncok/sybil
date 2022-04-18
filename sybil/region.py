@@ -1,4 +1,6 @@
-from sybil.typing import Parsed, Evaluator
+from typing import Any
+
+from sybil.typing import Evaluator
 
 
 class Region:
@@ -22,7 +24,7 @@ class Region:
         as it should be.
     """
 
-    def __init__(self, start: int, end: int, parsed: Parsed, evaluator: Evaluator):
+    def __init__(self, start: int, end: int, parsed: Any, evaluator: Evaluator):
         self.start, self.end, self.parsed, self.evaluator = (
             start, end, parsed, evaluator
         )
