@@ -104,8 +104,8 @@ class Sybil:
         if exclude:
             self.excludes.append(exclude)
         self.filenames = filenames
-        self.setup: Callable[[dict], None] = setup
-        self.teardown: Callable[[dict], None] = teardown
+        self.setup: Optional[Callable[[dict], None]] = setup
+        self.teardown: Optional[Callable[[dict], None]] = teardown
         self.fixtures: Sequence[str] = fixtures
         self.encoding: str = encoding
         self.document_types = DEFAULT_DOCUMENT_TYPES.copy()

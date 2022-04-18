@@ -43,7 +43,7 @@ class CodeBlockParser:
         # There must be a nicer way to get line numbers to be correct...
         return (line+1)*'\n' + source
 
-    def evaluate(self, example: Example):
+    def evaluate(self, example: Example) -> Optional[str]:
         raise NotImplementedError
 
     def __call__(self, document: Document) -> Iterable[Region]:

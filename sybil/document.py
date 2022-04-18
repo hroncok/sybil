@@ -2,7 +2,7 @@ import re
 from bisect import bisect
 from io import open
 from pathlib import Path
-from typing import List, Iterable, Pattern, Tuple, Match, Optional
+from typing import List, Pattern, Tuple, Match, Optional, Iterator
 
 from .example import Example
 from .python import import_path
@@ -97,7 +97,7 @@ class Document:
                 self.raise_overlap(region, next)
         self.regions.insert(index, entry)
 
-    def __iter__(self) -> Iterable[Example]:
+    def __iter__(self) -> Iterator[Example]:
         line = 1
         place = 0
         for _, region in self.regions:
@@ -110,7 +110,7 @@ class Document:
 
     def find_region_sources(
         self, start_pattern: Pattern[str], end_pattern: Pattern[str]
-    ) -> Tuple[Match, Match, str]:
+    ) -> Iterator[Tuple[Match, Match, str]]:
         """
         This helper method can be called used to extract source text
         for regions based on the two :ref:`regular expressions <re-objects>`

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, Any
 from unittest import TestCase as BaseTestCase, TestSuite
 
 if TYPE_CHECKING:
@@ -7,7 +7,8 @@ if TYPE_CHECKING:
 
 class TestCase(BaseTestCase):
 
-    sybil = namespace = None
+    sybil: 'Sybil'
+    namespace: Dict[str, Any]
 
     def __init__(self, example):
         BaseTestCase.__init__(self)

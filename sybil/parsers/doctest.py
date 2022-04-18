@@ -85,7 +85,7 @@ class DocTestParser(BaseDocTestParser):
     def evaluate(self, sybil_example: Example) -> str:
         example = sybil_example.parsed
         namespace = sybil_example.namespace
-        output = []
+        output: List[str] = []
         self.runner.run(
             DocTest([example], namespace, name=None,
                     filename=None, lineno=example.lineno, docstring=None),
