@@ -65,6 +65,7 @@ def evaluate_skip(example: Example) -> None:
     evaluator = example.document.evaluator
     if not isinstance(evaluator, Skip):
         example.document.evaluator = evaluator = Skip(evaluator)
+    assert evaluator is not None
     evaluator(example)
 
 

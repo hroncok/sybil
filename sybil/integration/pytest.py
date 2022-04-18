@@ -22,7 +22,9 @@ if TYPE_CHECKING:
 
 PYTEST_VERSION = tuple(int(i) for i in pytest.__version__.split('.'))
 
-example_module_path = abspath(getsourcefile(example))
+example_source_file = getsourcefile(example)
+assert example_source_file is not None
+example_module_path = abspath(example_source_file)
 
 
 class SybilFailureRepr(TerminalRepr):
@@ -59,6 +61,7 @@ class SybilItem(pytest.Item):
         self._request = fixtures.FixtureRequest(self, _ispytest=True)
 
     def reportinfo(self):
+        assert self.fspath is not None
         info = '%s line=%i column=%i' % (
             self.fspath.basename, self.example.line, self.example.column
         )
@@ -101,6 +104,7 @@ class SybilFile(pytest.File):
         self.sybil: 'Sybil' = sybil
 
     def collect(self):
+        assert self.fspath is not None
         self.document = self.sybil.parse(Path(self.fspath.strpath))
         for example in self.document:
             yield SybilItem.from_parent(self, sybil=self.sybil, example=example)
