@@ -27,7 +27,7 @@ class Document:
     #: including not executing the example at all, modifying it, or the
     #: :class:`~sybil.document.Document` or calling the original evaluator on the example.
     #: This last case should always take the form of ``example.region.evaluator(example)``.
-    evaluator: Evaluator = None
+    evaluator: Optional[Evaluator] = None
 
     def __init__(self, text: str, path: str):
         #: This is the text of the documentation source file.
@@ -143,5 +143,5 @@ class PythonDocument(Document):
         module = import_path(Path(example.path))
         self.namespace.update(module.__dict__)
         result = example.region.evaluator(example)
-        self.evaluator = None
+        # self.evaluator = None
         return result

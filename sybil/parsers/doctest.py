@@ -1,12 +1,11 @@
-import re
-from doctest import (
+from doctest import (  # type: ignore  # typeshed doesn't cover private attributes
     DocTest as BaseDocTest,
     DocTestParser as BaseDocTestParser,
     DocTestRunner as BaseDocTestRunner,
     Example as DocTestExample,
     _unittest_reportflags,
 )
-from typing import Iterable
+from typing import Iterable, List, Callable, Pattern
 
 from .. import Document, Example
 from ..region import Region
@@ -15,8 +14,7 @@ from ..region import Region
 class DocTest(BaseDocTest):
     def __init__(self, examples, globs, name, filename, lineno, docstring):
         # do everything like regular doctests, but don't make a copy of globs
-        BaseDocTest.__init__(self, examples, globs, name, filename, lineno,
-            docstring)
+        BaseDocTest.__init__(self, examples, globs, name, filename, lineno, docstring)
         self.globs = globs
 
 
@@ -44,6 +42,12 @@ class DocTestParser(BaseDocTestParser):
         when evaluating the examples found by this parser.
 
     """
+
+    # typeshed doesn't cover private attributes
+    _min_indent: Callable
+    _EXAMPLE_RE: Pattern
+    _parse_example: Callable
+
     def __init__(self, optionflags=0):
         self.runner = DocTestRunner(optionflags)
 
@@ -66,7 +70,7 @@ class DocTestParser(BaseDocTestParser):
                      self._parse_example(m, document.path, lineno)
 
             # Create an Example, and add it to the list.
-            if not self._IS_BLANK_OR_COMMENT(source):
+            if not self._IS_BLANK_OR_COMMENT(source):  # type: ignore  # match method of a pattern!
                 yield Region(
                     m.start(),
                     m.end(),

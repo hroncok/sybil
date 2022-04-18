@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, Any
 
 from .region import Region
+from .typing import Evaluator
 
 if TYPE_CHECKING:
     from .document import Document

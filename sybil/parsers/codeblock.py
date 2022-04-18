@@ -1,7 +1,7 @@
 import __future__
 import re
 import textwrap
-from typing import Iterable
+from typing import Iterable, Callable, Optional
 
 from sybil import Region, Document, Example
 from sybil.typing import Evaluator
@@ -33,7 +33,7 @@ class CodeBlockParser:
             self.language = language
         assert self.language, 'language must be specified!'
         if evaluator is not None:
-            self.evaluate = evaluator
+            self.evaluate: Evaluator = evaluator  # type: ignore  # mypy is wrong :-/
 
     def pad(self, source: str, line: int) -> str:
         """

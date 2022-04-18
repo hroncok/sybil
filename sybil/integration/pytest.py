@@ -122,10 +122,10 @@ def pytest_integration(sybil: 'Sybil'):
 
     def pytest_collect_file(path: py.path.local, parent: Collector):
         fspath = path
-        path = Path(fspath.strpath)
-        if sybil.should_parse(path):
+        path_: Path = Path(fspath.strpath)
+        if sybil.should_parse(path_):
             if PYTEST_VERSION[0] >= 7:
-                return SybilFile.from_parent(parent, path=path, sybil=sybil)
+                return SybilFile.from_parent(parent, path=path_, sybil=sybil)
             else:
                 return SybilFile.from_parent(parent, fspath=fspath, sybil=sybil)
 
